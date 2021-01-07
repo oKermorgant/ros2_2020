@@ -31,7 +31,13 @@ R2D2 is already moving independently. The simulation publishes the pose of all r
  \item \texttt{d0/base\_link}
 \end{itemize}
 
-For the two controlled robots (BB8 and D0), the simulation also subscribes to the command velocity on \texttt{bb8/cmd\_vel} and \texttt{d0/cmd\_vel}, as a \texttt{geometry\_msgs/Twist} message.
+For the two controlled robots (BB8 and D0), the simulation also subscribes to the command velocity on \texttt{bb8/cmd\_vel} and \texttt{d0/cmd\_vel}, as a \texttt{geometry\_msgs/Twist} message.\\
+The final graph should look like this:
+\begin{center}
+ \includegraphics[width=.8\linewidth]{rosgraph}
+\end{center}
+
+\newpage
 
 \section{Writing the node}
 
@@ -78,11 +84,14 @@ You can start by publishing only 0 values, that should let the 3D models display
 
 \section{The launch file}
 
-The launch file should run the node twice, so that BB8 follows R2D2 and D0 follows BB8. Each node should be run in the corresponding robot namespace. The robot name and target should be passed as node parameters.
-
+The launch file should run the node twice, so that BB8 follows R2D2 and D0 follows BB8. Each node should be run in the corresponding robot namespace. The robot name and target should be passed as node parameters, that will be used to know which frames to use in the control.
+\newpage
 \section{Tips}
 
-In order to efficiently debug your code, it is strongly advised to write the node in a specific way to have BB8 follow R2D2. You can then make it generic and run it through the launch file.\\
+Compile the code once using \texttt{colbuild --packages-select ros2\_2020}. Then, use \texttt{gqt} in the package folder to configure QtCreator. Do not forget to use it with ROS 2 setup.\\
+
+In order to efficiently debug your code, it is strongly advised to write the node in a specific way to have BB8 follow R2D2. This node should do all necessary things with hard-coded parameters and topics.\\
+You can then make it generic and run it through the launch file.\\
 
 Feel free to have a look at the \texttt{basic\_node.cpp} from the lab templates.\\
 
